@@ -1,10 +1,5 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Amit Melamed — Game Developer</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Cpath d=%27M3 28 L13 8 L17 14 L20 10 L29 28Z%27 fill=%27%23e07a3c%27/%3E%3Cpath d=%27M11 12 L13 8 L15 11Z%27 fill=%27%23fff%27/%3E%3C/svg%3E">
+<!doctype html><html><head><meta charset=utf8><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Cpath d=%27M3 28 L13 8 L17 14 L20 10 L29 28Z%27 fill=%27%23e07a3c%27/%3E%3Cpath d=%27M11 12 L13 8 L15 11Z%27 fill=%27%23fff%27/%3E%3C/svg%3E"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Amit Melamed Portfolio</title>
 <meta name="description" content="Amit Melamed — Game & Algorithm Developer (Unreal C++, destruction, AI, multiplayer). A procedural low-poly city you can destroy with real-time physics.">
 <meta name="theme-color" content="#151a26">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -99,6 +94,8 @@ body.cv-off #cv{transform:translateX(calc(-100% - 28px));opacity:0;pointer-event
 .copy{font-size:11.5px;padding:5px 9px;border-radius:7px;background:#f5f1e8;color:#1b1f2c;font-weight:600;flex:none}
 .copy:hover{background:#fff}
 .edu{font-size:13px;color:#d4d7e1}
+.contact-row a.sel{color:#fffaf0;text-decoration:none}
+.avatar.sm{width:38px;height:38px;border-radius:11px;font-size:14px}
 #cvTab{position:fixed;left:0;top:50%;z-index:24;transform:translate(-110%,-50%);padding:14px 9px;border-radius:0 12px 12px 0;writing-mode:vertical-rl;font-family:var(--fd);font-weight:700;font-size:13px;letter-spacing:.06em;
  background:#f5f1e8;color:#1b1f2c;box-shadow:0 8px 30px rgba(10,12,22,.3);transition:transform .45s cubic-bezier(.2,.8,.2,1)}
 body.cv-off #cvTab{transform:translate(0,-50%)}
@@ -131,36 +128,74 @@ body.cv-off #hint{left:50vw}
 body.cine .ui,body.capture .ui{opacity:0!important;pointer-events:none!important;visibility:hidden}
 body.capture #load{display:none}
 @media (max-width:760px){
+ /* phone layout: a bottom sheet with three stops (peek / half / full), pill tabs, thumb-sized targets, no blur (cheap to composite) */
  .top{padding:10px 12px;gap:8px}
  .brand b{font-size:16px}
- .brand span{font-size:11px}
- .btn{padding:0 9px;height:34px}
+ .brand span{display:none}
+ .btn{width:40px;height:40px;padding:0;justify-content:center;border-radius:12px}
  .btn span,.chip{display:none}
- .tools{gap:5px}
- #stats{top:54px;right:12px;font-size:10px}
- #cv{left:0;right:0;top:auto;bottom:0;width:auto;max-width:none;height:min(76vh,640px);border-radius:18px 18px 0 0;z-index:35;border-bottom:0}
- body.cv-off #cv{transform:translateY(calc(100% - 48px));opacity:1;pointer-events:auto}
- .cv-handle{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;height:48px;flex:none;font-family:var(--fd);font-weight:700;font-size:14px;color:#f5f1e8;position:relative}
- .cv-handle::before{content:'';position:absolute;top:7px;left:50%;width:38px;height:4px;margin-left:-19px;border-radius:4px;background:rgba(255,255,255,.28)}
- .cv-handle svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.2;transition:transform .3s}
+ .btn svg{width:18px;height:18px}
+ .tools{gap:6px}
+ #stats{display:none}
+ #cv{left:0;right:0;top:auto;bottom:0;width:auto;max-width:none;height:min(60vh,520px);height:min(60dvh,520px);border-radius:22px 22px 0 0;z-index:35;border-bottom:0;background:rgba(17,21,33,.96);-webkit-backdrop-filter:none;backdrop-filter:none;
+  box-shadow:0 -12px 40px rgba(10,12,22,.4);transition:height .38s cubic-bezier(.2,.8,.2,1)}
+ body.cv-full #cv{height:min(90vh,760px);height:min(90dvh,760px)}
+ body.cv-off #cv{height:calc(68px + env(safe-area-inset-bottom,0px));transform:none;opacity:1;pointer-events:auto}
+ body.cv-off .cv-head .tabs,body.cv-off .cv-body{visibility:hidden}
+ .cv-handle{display:block;width:100%;height:68px;flex:none;color:#f5f1e8;position:relative;text-align:left;touch-action:none;padding:0 16px}
+ .cv-handle .grab{position:absolute;top:8px;left:50%;width:40px;height:4px;margin-left:-20px;border-radius:4px;background:rgba(255,255,255,.3)}
+ .cv-handle .hrow{display:flex;align-items:center;gap:12px;height:100%;padding-top:10px}
+ .cv-handle .ht{display:flex;flex-direction:column;min-width:0;flex:1}
+ .cv-handle .ht b{font-family:var(--fd);font-size:16px;font-weight:800;color:#fffaf0;line-height:1.15}
+ .cv-handle .ht small{font-size:12px;color:#b7bbc9;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ .cv-handle svg{width:22px;height:22px;flex:none;stroke:currentColor;fill:none;stroke-width:2.2;transition:transform .3s}
  body:not(.cv-off) .cv-handle svg{transform:rotate(180deg)}
- .cv-head{padding:0 16px}
- .who .ghost{display:none}
+ body:not(.cv-off) .cv-handle .tp{display:none}
+ body.cv-full .cv-handle svg{transform:rotate(180deg)}
+ .cv-head{padding:0}
+ .who{display:none}
+ .tabs{margin:0;padding:2px 16px 12px;gap:8px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+ .tabs::-webkit-scrollbar{display:none}
+ .tabs button{flex:none;height:38px;padding:0 16px;font-size:14px;border-radius:999px;background:rgba(255,255,255,.07)}
+ .cv-body{padding:2px 18px calc(32px + env(safe-area-inset-bottom,0px))}
+ .cv-body section{padding-top:20px}
+ .cv-body h2{font-size:12.5px;margin-bottom:12px}
+ .cv-body p{font-size:15px;line-height:1.6}
+ .job li,.cv-body li{font-size:14.5px;line-height:1.55;margin:5px 0}
+ .jh{flex-wrap:wrap;row-gap:2px}
+ .jh h3{font-size:18px}
+ .when{font-size:12px}
+ .org{font-size:13.5px;margin:3px 0 9px}
+ .job{padding:16px 0}
+ .vid{font-size:14px;padding:6px 0}
+ .card{padding:14px;border-radius:14px}
+ .card h3{font-size:16px}
+ .card p{font-size:13.5px;line-height:1.5}
+ .links{gap:8px}
+ .links a{flex:1 1 auto;justify-content:center;font-size:14.5px;padding:12px 14px;border-radius:12px;min-height:46px}
+ .vlist a{font-size:14.5px;padding:14px 4px}
+ .sk h3{font-size:12px}
+ .tags{gap:7px}
+ .tags span{font-size:13px;padding:6px 10px;border-radius:9px}
+ .contact-row{padding:6px 8px 6px 14px;min-height:56px;border-radius:14px;gap:10px}
+ .contact-row .lbl{font-size:12px;width:44px}
+ .contact-row .sel{font-size:14.5px}
+ .copy{font-size:13px;padding:10px 14px;border-radius:10px}
  #cvTab{display:none}
- #dock,body.cv-off #dock{left:50vw;bottom:58px;padding:5px;gap:2px}
- .wpn{width:60px;height:52px}
+ #dock,body.cv-off #dock{left:50%;bottom:calc(80px + env(safe-area-inset-bottom,0px));width:calc(100vw - 20px);max-width:430px;padding:5px;gap:2px;justify-content:space-between;border-radius:18px}
+ .wpn{flex:1 1 0;min-width:0;width:auto;height:54px}
  .wpn .nm{font-size:10px}
+ .wpn .k{display:none}
  .tip{display:none}
- #hint,body.cv-off #hint{left:50vw;bottom:128px;font-size:12.5px}
-}
-@media (prefers-reduced-motion:reduce){*{transition-duration:.01s!important;animation-duration:.01s!important}#load i::after{animation:none;width:100%;opacity:.55}}
+ #hint,body.cv-off #hint{left:50%;bottom:calc(150px + env(safe-area-inset-bottom,0px));font-size:12.5px;max-width:calc(100vw - 32px);white-space:normal;text-align:center}
+ body:not(.cv-off) #dock,body:not(.cv-off) #hint{display:none}
+ #toast{top:64px}
+}@media (prefers-reduced-motion:reduce){*{transition-duration:.01s!important;animation-duration:.01s!important}#load i::after{animation:none;width:100%;opacity:.55}}
 </style>
 <script type="importmap">{"imports":{
   "three":"https://unpkg.com/three@0.169.0/build/three.module.js",
   "three/addons/":"https://unpkg.com/three@0.169.0/examples/jsm/",
   "rapier":"https://cdn.jsdelivr.net/npm/@dimforge/rapier3d-compat@0.14.0/rapier.es.js"}}</script>
-</head>
-<body>
 <canvas id="c" tabindex="-1" aria-label="Interactive destructible low-poly city"></canvas>
 <div id="load" role="progressbar" aria-label="Generating city"><i></i></div>
 
@@ -178,7 +213,7 @@ body.capture #load{display:none}
 <div id="stats" class="ui">— fps</div>
 
 <aside id="cv" class="ui" aria-label="Curriculum vitae">
-  <button class="cv-handle" id="cvHandle" aria-controls="cvBody" aria-expanded="false">Amit Melamed · CV <svg viewBox="0 0 24 24"><path d="m6 15 6-6 6 6"/></svg></button>
+  <button class="cv-handle" id="cvHandle" aria-controls="cvBody" aria-expanded="false"><span class="grab"></span><span class="hrow"><span class="avatar sm" aria-hidden="true">AM</span><span class="ht"><b>Amit Melamed</b><small>Game &amp; Algorithm Developer<span class="tp"> · tap for CV</span></small></span><svg viewBox="0 0 24 24"><path d="m6 15 6-6 6 6"/></svg></span></button>
   <div class="cv-head">
     <div class="who">
       <div class="avatar" aria-hidden="true">AM</div>
@@ -231,9 +266,6 @@ body.capture #load{display:none}
       <h2 style="margin-top:14px">Videos</h2>
       <ul class="vlist">
         <li><a href="https://www.youtube.com/watch?v=OXqmQkVTIVE" target="_blank" rel="noopener">Spearhead 2 — Announcement Trailer</a></li>
-        <li><a href="https://www.youtube.com/watch?v=fFwMCurV1sU" target="_blank" rel="noopener">Destruction Optimization</a></li>
-        <li><a href="https://www.youtube.com/watch?v=iU6edcVqtOU" target="_blank" rel="noopener">Gameplay</a></li>
-        <li><a href="https://www.youtube.com/watch?v=SAhpjS_UV90" target="_blank" rel="noopener">26 vs 26</a></li>
         <li><a href="https://youtu.be/q1PzQ0d4hWI" target="_blank" rel="noopener">UE5 Water &amp; PCG</a></li>
       </ul>
     </section>
@@ -247,8 +279,8 @@ body.capture #load{display:none}
     </section>
     <section id="contact">
       <h2>Contact</h2>
-      <div class="contact-row"><span class="lbl">Email</span><span class="sel">amitpay1234@gmail.com</span><button class="copy" data-copy="amitpay1234@gmail.com">Copy</button></div>
-      <div class="contact-row"><span class="lbl">Phone</span><span class="sel">052-890-0672</span><button class="copy" data-copy="052-890-0672">Copy</button></div>
+      <div class="contact-row"><span class="lbl">Email</span><a class="sel" href="mailto:amitpay1234@gmail.com">amitpay1234@gmail.com</a><button class="copy" data-copy="amitpay1234@gmail.com">Copy</button></div>
+      <div class="contact-row"><span class="lbl">Phone</span><a class="sel" href="tel:+972528900672">052-890-0672</a><button class="copy" data-copy="052-890-0672">Copy</button></div>
       <div class="links" style="margin-top:8px">
         <a href="https://www.linkedin.com/in/amit-melamed-956875220/" target="_blank" rel="noopener">LinkedIn ↗</a>
         <a href="https://github.com/amitmelamed" target="_blank" rel="noopener">GitHub ↗</a>
@@ -478,8 +510,8 @@ function groundMat(band) {
       .replace('#include <begin_vertex>', `#include <begin_vertex>\nvWP = position;${band ? ' vBand = aBand;' : ''}`);
     s.fragmentShader = s.fragmentShader.replace('#include <common>', `#include <common>\nvarying vec3 vWP;${band ? '\nvarying vec2 vBand;' : ''}\n${NOISE_GLSL}`).replace('#include <clipping_planes_pars_fragment>', '#include <clipping_planes_pars_fragment>' + String.fromCharCode(10) + BUMP_GLSL)
       .replace('#include <color_fragment>', `#include <color_fragment>
-  vec4 NB = texture2D(uN, vWP.xz * .125), NA = texture2D(uN, vWP.xz * .004); float fw = length(fwidth(vWP.xz)), far = smoothstep(.05, .5, fw), n1 = mix(NB.r, NA.r, .5), n2 = NB.g, n3 = NB.b, H = n2 * .6 + n3 * .4 * (1. - far), rgh = .96;
-  diffuseColor.rgb *= .85 + .22 * n1 + .1 * (n2 - .5);${band ? `
+  vec4 NB = texture2D(uN, vWP.xz * .125), NA = texture2D(uN, vWP.xz * .004), NC = texture2D(uN, vWP.xz * .55); float fw = length(fwidth(vWP.xz)), far = smoothstep(.05, .5, fw), n1 = mix(NB.r, NA.r, .5), n2 = NB.g, n3 = NB.b, H = n2 * .6 + n3 * .4 * (1. - far) + NC.g * .45 * (1. - far), rgh = .96;
+  diffuseColor.rgb *= (.85 + .22 * n1 + .1 * (n2 - .5)) * (.93 + .14 * NC.r * (1. - far));${band ? `
   if (vBand.x < 0.) { diffuseColor.rgb = ${v3s(C(PAL.road))} * (.86 + .16 * n2 + .1 * (n3 - .5) * (1. - far)); H = n3 * .5; rgh = .8; }
   else if (vBand.x < .32) { diffuseColor.rgb = ${v3s(C(PAL.curb))} * (.92 + .1 * n2); rgh = .78; }
   else if (vBand.y < 0.) { vec2 q = vWP.xz / .6, f = fract(q); float j = (1. - smoothstep(0., .05 + fw, min(min(f.x, 1. - f.x), min(f.y, 1. - f.y)))) * (1. - far);
@@ -497,7 +529,26 @@ carMat.onBeforeCompile = s => { s.vertexShader = s.vertexShader.replace('#includ
     .replace('#include <roughnessmap_fragment>', '#include <roughnessmap_fragment>\n  roughnessFactor = mix(roughnessFactor, .06, vPn);'); };
 const markMat = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: .7, polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -4 });
 const waterMat = new THREE.MeshStandardMaterial({ color: PAL.water, roughness: .06, metalness: .1, transparent: true, opacity: .88 });
-const leafMat = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: .8, envMapIntensity: .35 });
+// trees: wood vs leaf per vertex (aWd). Leaves get clumped noise shading, bark its own tone; the crowns sway in the wind (more with height)
+const LEAFU = { value: 0 };
+function leafMaterial(side) {
+  const m = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: .82, envMapIntensity: .35, side });
+  m.onBeforeCompile = s => { s.uniforms.uN = { value: NTEX }; s.uniforms.uT = LEAFU;
+    s.vertexShader = s.vertexShader.replace('#include <common>', '#include <common>\nattribute float aWd; uniform float uT; varying float vWd; varying float vKb; varying vec3 vLP;')
+      .replace('#include <begin_vertex>', `#include <begin_vertex>
+vWd = aWd; vKb = color.r; vLP = position;
+#ifdef USE_INSTANCING
+float sw = position.y * position.y * .0035 * (1. - aWd * .85), ph = instanceMatrix[3].x * .21 + instanceMatrix[3].z * .17;
+transformed.x += sin(uT * 1.5 + ph) * sw; transformed.z += cos(uT * 1.2 + ph * 1.3) * sw * .7;
+#endif`);
+    s.fragmentShader = s.fragmentShader.replace('#include <common>', '#include <common>\nuniform sampler2D uN; varying float vWd; varying float vKb; varying vec3 vLP;')
+      .replace('#include <color_fragment>', `#include <color_fragment>
+  { vec4 nb = texture2D(uN, vLP.xz * .55 + vLP.y * .31); vec3 bark = vec3(.13, .085, .055) * (.7 + .65 * vKb) * (.8 + .4 * nb.r);
+    diffuseColor.rgb = mix(diffuseColor.rgb * (.74 + .5 * nb.g), bark, vWd); }`);
+  };
+  return m;
+}
+const leafMat = leafMaterial(THREE.FrontSide), leafMatDS = leafMaterial(THREE.DoubleSide);
 const cloudMat = new THREE.MeshLambertMaterial({ color: 0xffffff, emissive: 0x9aa4b0 });
 // image-based light: the sky shader rendered into a PMREM cube (no files)
 { const pm = new THREE.PMREMGenerator(renderer), s = new THREE.Scene(), em = sky.material.clone(); em.fragmentShader = em.fragmentShader.replace('pow(s, 1400.) * 9. + pow(s, 60.) * .5 + pow(s, 6.) * .18', 'pow(s, 6.) * .12'); s.add(new THREE.Mesh(sky.geometry, em)); scene.environment = pm.fromScene(s, 0, .1, 9000).texture; pm.dispose(); }
@@ -511,20 +562,75 @@ function lumpGeo(lobes, rough, sd) {
     const k = clamp(.58 + .42 * clamp((y + .7) / 1.7, 0, 1) + n * 1.5, .4, 1.1); col[i * 3] = k; col[i * 3 + 1] = k; col[i * 3 + 2] = k; }
   g.setAttribute('color', new THREE.BufferAttribute(col, 3)); g.computeVertexNormals(); return g;
 }
-const white = g => { g.setAttribute('color', new THREE.BufferAttribute(new Float32Array(g.attributes.position.count * 3).fill(1), 3)); return g; };
-const TREE_GEO = {
-  trunk: white(new THREE.CylinderGeometry(.11, .2, 1, 6).translate(0, .5, 0)),
-  blob: lumpGeo([[0, 0, 0, 1, 1], [.55, -.2, .32, .62, 0], [-.48, -.14, -.36, .6, 0], [.06, .42, -.24, .58, 0]], .09, 1.3),
-  cone: (() => { const P = [], C3 = []; for (const [r, h, y, k] of [[1, 1.3, .65, .62], [.78, 1.15, 1.35, .8], [.52, .95, 1.95, 1]]) { const g = new THREE.ConeGeometry(r, h, 9).translate(0, y, 0).toNonIndexed(); P.push(...g.attributes.position.array);
-    for (let i = 0; i < g.attributes.position.count; i++) { const kk = k * (.82 + .18 * (g.attributes.position.getY(i) - y + h / 2) / h); C3.push(kk, kk, kk); } }
-    const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(P, 3)); g.setAttribute('color', new THREE.Float32BufferAttribute(C3, 3)); g.computeVertexNormals(); return g; })()
-};
-const TREE_LO = { // island forests (seen from afar): the same silhouettes at a fraction of the triangles
-  trunk: white(new THREE.CylinderGeometry(.11, .2, 1, 4).translate(0, .5, 0)), blob: lumpGeo([[0, 0, 0, 1, 0], [.45, -.15, .25, .62, 0]], .07, 1.3),
-  cone: (() => { const g = new THREE.ConeGeometry(1, 2.6, 6).translate(0, 1.3, 0).toNonIndexed(), P = g.attributes.position, C3 = []; for (let i = 0; i < P.count; i++) { const k = .62 + .38 * P.getY(i) / 2.6; C3.push(k, k, k); } g.setAttribute('color', new THREE.Float32BufferAttribute(C3, 3)); g.computeVertexNormals(); return g; })() };
+const BLOB_GEO = lumpGeo([[0, 0, 0, 1, 1], [.55, -.2, .32, .62, 0], [-.48, -.14, -.36, .6, 0], [.06, .42, -.24, .58, 0]], .09, 1.3);   // clouds only
+// ---- procedural trees: every variant is grown from a seed. Broadleaf: a leaning, tapered trunk with root flare, forked branches that
+// reach into a crown of ragged leaf masses. Conifer: tiered, drooping boughs on a slim trunk. Cypress: a stacked column. Palm: a ringed
+// leaning trunk with arching fronds. Wood vs leaf is a per-vertex flag (aWd), so one mesh per variant draws trunk + crown while the
+// instance colour tints the leaves only. lod 1 (island forests, seen from afar) keeps the silhouettes at a fraction of the triangles.
+function growTree(kind, seed, lod) {
+  const R = mul32(Math.imul(seed + 1, 2654435761) ^ (kind * 40503)), rf = (a, b) => a + (b - a) * R(), near = !lod;
+  const P = [], K = [], W = [], I = [];
+  const vtx = (x, y, z, k, w) => { P.push(x, y, z); K.push(k, k, k); W.push(w); return P.length / 3 - 1; };
+  const ftri = (a, b, c, ox, oy, oz) => { const A = a * 3, B = b * 3, C3 = c * 3, ux = P[B] - P[A], uy = P[B + 1] - P[A + 1], uz = P[B + 2] - P[A + 2], vx = P[C3] - P[A], vy = P[C3 + 1] - P[A + 1], vz = P[C3 + 2] - P[A + 2],
+      nx = uy * vz - uz * vy, ny = uz * vx - ux * vz, nz = ux * vy - uy * vx, cx = (P[A] + P[B] + P[C3]) / 3 - ox, cy = (P[A + 1] + P[B + 1] + P[C3 + 1]) / 3 - oy, cz = (P[A + 2] + P[B + 2] + P[C3 + 2]) / 3 - oz;
+    if (nx * cx + ny * cy + nz * cz >= 0) I.push(a, b, c); else I.push(a, c, b); };
+  const tube = (pts, rad, sides, kk) => { // tapered tube along a polyline; the rings wrap, so the normals stay smooth
+    const b0 = P.length / 3, n = pts.length;
+    for (let i = 0; i < n; i++) { const a = pts[Math.max(i - 1, 0)], b = pts[Math.min(i + 1, n - 1)]; let tx = b[0] - a[0], ty = b[1] - a[1], tz = b[2] - a[2]; const tl = Math.hypot(tx, ty, tz) || 1; tx /= tl; ty /= tl; tz /= tl;
+      let hx = 0, hz = 1; if (Math.abs(tz) > .9) { hx = 1; hz = 0; }
+      let ux = ty * hz, uy = tz * hx - tx * hz, uz = -ty * hx; const ul = Math.hypot(ux, uy, uz) || 1; ux /= ul; uy /= ul; uz /= ul;
+      const vx = ty * uz - tz * uy, vy = tz * ux - tx * uz, vz = tx * uy - ty * ux;
+      for (let j = 0; j < sides; j++) { const an = j / sides * 6.2832, c = Math.cos(an) * rad[i], s = Math.sin(an) * rad[i]; vtx(pts[i][0] + ux * c + vx * s, pts[i][1] + uy * c + vy * s, pts[i][2] + uz * c + vz * s, kk * rf(.88, 1.1), 1); } }
+    for (let i = 0; i < n - 1; i++) for (let j = 0; j < sides; j++) { const a = b0 + i * sides + j, b = b0 + i * sides + (j + 1) % sides, c = a + sides, d = b + sides; I.push(a, b, c, b, d, c); }
+  };
+  const lobe = (cx, cy, cz, rx, ry, rz, rough, y0, y1) => { // an icosphere with ragged radial noise (leaf clusters), darker below and inside
+    const src = new THREE.IcosahedronGeometry(1, near ? 1 : 0), g0 = new THREE.BufferGeometry(); g0.setAttribute('position', new THREE.Float32BufferAttribute(src.attributes.position.array, 3)); src.dispose();
+    const g = mergeVertices(g0), pos = g.attributes.position, b0 = P.length / 3, ph = rf(0, 9);
+    for (let i = 0; i < pos.count; i++) { const x = pos.getX(i), y = pos.getY(i), z = pos.getZ(i), l = Math.hypot(x, y, z) || 1, ux = x / l, uy = y / l, uz = z / l,
+        n = Math.sin(ux * 3.1 + ph) * Math.sin(uy * 2.7 - uz * 2.3 + ph * 1.7) * .5 + Math.sin(ux * 7.3 - uz * 6.1 + ph) * Math.sin(uy * 6.9 + ph * .6) * .5, q = 1 + n * rough, wy = cy + uy * q * ry;
+      vtx(cx + ux * q * rx, wy, cz + uz * q * rz, clamp(.5 + .55 * clamp((wy - y0) / (y1 - y0), 0, 1), .35, 1.05) * (.84 + .3 * (n + .5)) * (.88 + .12 * uy), 0); }
+    for (const i of g.index.array) I.push(b0 + i); g.dispose(); g0.dispose();
+  };
+  if (kind === 0) { // broadleaf
+    const th = rf(2.1, 2.9), lx = rf(-.3, .3), lz = rf(-.3, .3), n = near ? 5 : 3, pts = [], rad = [];
+    for (let i = 0; i < n; i++) { const t = i / (n - 1); pts.push([lx * t * t + Math.sin(t * 4 + seed) * .07 * t, -.2 + (th + .2) * t, lz * t * t + Math.cos(t * 3.3 + seed) * .06 * t]); rad.push((i === 0 ? .34 : .24) * (1 - t * .62) + .02); }
+    tube(pts, rad, near ? 6 : 4, .9);
+    const nb = near ? (MOBILE ? 4 : 6) : 3, y0 = th * .75 - .2, y1 = th + 2.1, rough = near ? .2 : .26;
+    const at = t => { const f = t * (n - 1), i = Math.min(n - 2, f | 0), u = f - i; return [0, 1, 2].map(k => pts[i][k] + (pts[i + 1][k] - pts[i][k]) * u); };
+    for (let k = 0; k < nb; k++) { const an = k / nb * 6.2832 + rf(-.4, .4), el = rf(.5, 1), L = rf(1.1, 1.8), a0 = at(rf(.55, .92)), dx = Math.cos(an) * Math.cos(el), dy = Math.sin(el), dz = Math.sin(an) * Math.cos(el);
+      const e = [a0[0] + dx * L, a0[1] + dy * L, a0[2] + dz * L], m = [a0[0] + dx * L * .5, a0[1] + dy * L * .5 + .1, a0[2] + dz * L * .5];
+      tube([a0, m, e], [.09, .06, .035], near ? 4 : 3, .85);
+      const r0 = rf(.8, 1.2); lobe(e[0], e[1] + .25, e[2], r0, r0 * rf(.72, .88), r0, rough, y0, y1); }
+    lobe(lx + rf(-.2, .2), th + .75, lz + rf(-.2, .2), rf(1, 1.25), rf(.85, 1), rf(1, 1.25), rough, y0, y1);
+    if (near) lobe(lx * .5, th + 1.55, lz * .5, rf(.65, .85), rf(.55, .7), rf(.65, .85), rough, y0, y1);
+  } else if (kind === 1) { // conifer
+    const H = rf(4.6, 5.6), lean = rf(-.12, .12), n = near ? 4 : 3, nt = near ? 7 : 4, sg = near ? 9 : 6;
+    tube(Array.from({ length: n }, (_, i) => [lean * i / (n - 1) * .5, -.2 + (H + .2) * i / (n - 1), 0]), Array.from({ length: n }, (_, i) => .15 * (1 - i / (n - 1) * .8) + .02), near ? 5 : 4, .8);
+    for (let i = 0; i < nt; i++) { const t = i / (nt - 1), y0 = .9 + t * H * .6, rd = 1.45 * (1 - t * .8) * rf(.92, 1.1), h = (1.5 - t * .5) * rf(.95, 1.1), ring = [];
+      const ap = vtx(lean * (y0 + h) / H * .5, y0 + h, 0, .85 + .25 * t, 0);
+      for (let j = 0; j < sg; j++) { const an = j / sg * 6.2832 + i * .7, rj = rd * rf(.82, 1.12); ring.push(vtx(Math.cos(an) * rj, y0 - (j & 1 ? .14 : 0) - .05, Math.sin(an) * rj, (.5 + .4 * t) * rf(.85, 1.1), 0)); }
+      for (let j = 0; j < sg; j++) ftri(ap, ring[j], ring[(j + 1) % sg], 0, y0 + h * .3, 0); }
+  } else if (kind === 2) { // cypress
+    const H = rf(4.2, 5), nl = near ? 5 : 3; tube([[0, -.2, 0], [0, .9, 0]], [.2, .12], near ? 5 : 4, .8);
+    for (let i = 0; i < nl; i++) { const t = i / (nl - 1), rx = .62 * (1 - t * .45); lobe(rf(-.08, .08), 1 + t * (H - 1.6), rf(-.08, .08), rx, .95, rx, .18, .8, H); }
+  } else if (kind === 4) { // palm
+    const H = rf(5, 6.4), bx = rf(.6, 1.2) * (R() < .5 ? -1 : 1), bz = rf(-.5, .5), n = near ? 8 : 4, pts = [], rad = [];
+    for (let i = 0; i < n; i++) { const t = i / (n - 1); pts.push([bx * t * t, -.2 + (H + .2) * t, bz * t * t]); rad.push((.2 * (1 - t * .4) + .03) * (i & 1 ? 1.12 : 1)); }
+    tube(pts, rad, near ? 6 : 4, .85);
+    const top = pts[n - 1], nf = near ? 9 : 6, sj = near ? 5 : 3;
+    for (let f = 0; f < nf; f++) { const an = f / nf * 6.2832 + rf(-.2, .2), L = rf(2.3, 3), dx = Math.cos(an), dz = Math.sin(an), v = [];
+      for (let j = 0; j <= sj; j++) { const u = j / sj, w = .55 * Math.pow(1 - u, .7) + .05, sx = top[0] + dx * L * u, sy = top[1] + L * (.55 * u - .95 * u * u) + .1, sz = top[2] + dz * L * u, k = (.62 + .4 * u) * rf(.92, 1.08);
+        v.push([vtx(sx - dz * w, sy - w * .55, sz + dx * w, k, 0), vtx(sx, sy + .05, sz, k * 1.08, 0), vtx(sx + dz * w, sy - w * .55, sz - dx * w, k, 0)]); }
+      for (let j = 0; j < sj; j++) for (const s of [0, 1]) { const a = v[j][s], b = v[j][s + 1], c = v[j + 1][s], d = v[j + 1][s + 1]; I.push(a, c, b, b, c, d); } }
+  } else { // bush
+    lobe(0, .38, 0, .62, .45, .62, .22, 0, .9); lobe(.45, .28, .22, .45, .34, .45, .22, 0, .9); lobe(-.4, .3, -.26, .42, .32, .42, .22, 0, .9);
+  }
+  const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(P, 3)); g.setAttribute('color', new THREE.Float32BufferAttribute(K, 3)); g.setAttribute('aWd', new THREE.Float32BufferAttribute(W, 1));
+  g.setIndex(I); g.computeVertexNormals(); g.computeBoundingSphere(); return g;
+}
+const TV = [0, 1].map(lod => { const gen = (kind, n) => Array.from({ length: n }, (_, i) => growTree(kind, 11 + i * 7 + kind * 101, lod)); return { b: gen(0, 3 - lod), p: gen(1, 2), c: gen(2, 1), m: gen(4, 1), u: gen(3, 1) }; });
 const LAMP_GEO = (() => { const b = new GB(), d = C(0x4b5262), y = C(0xffe9b0); b.box(-.09, 0, -.09, .09, 5, .09, d); b.box(-.05, 4.78, -.05, .05, 4.9, 1.05, d); b.box(-.24, 4.55, .78, .24, 4.82, 1.32, y); b.box(-.18, 0, -.18, .18, .4, .18, d); return b.build(); })();
 const BENCH_GEO = (() => { const b = new GB(), w = C(0xb98352), d = C(0x4b5262); b.box(-.9, .42, -.26, .9, .5, .22, w); b.box(-.9, .52, .2, .9, .95, .28, w); for (const x of [-.75, .75]) b.box(x - .05, 0, -.22, x + .05, .5, .26, d); return b.build(); })();
-const PALM_GEO = (() => { const b = new GB(), w = C(0xffffff); for (let i = 0; i < 7; i++) { const a = i / 7 * 6.283; b.geo(new THREE.BoxGeometry(.5, .06, 2.6), M4().makeRotationY(a).multiply(T4(0, -.35, 1.25)).multiply(M4().makeRotationX(.32)), w); } b.geo(new THREE.IcosahedronGeometry(.35, 0), null, w); return b.build(); })();
 // ============================================================ world state
 const TILE = 460, SW = 2.6, STEP = 1 / 60, GRAV = -12;
 let BY = .2, XF = null; // base height + local frame of the building being generated (set by withFrame)
@@ -1074,8 +1180,8 @@ const addLamp = (x, z, yaw, y = BY) => { if (XF) { [x, z] = XF.toW(x, z); yaw +=
 const addBench = (x, z, yaw, y = BY) => { if (XF) { [x, z] = XF.toW(x, z); yaw += XF.a; } benches.push({ x, y, z, yaw, alive: true }); };
 
 // ============================================================ island terrain
-const SEA = -1.6, HN = 192, HEXT = 480, HSTEP = 2 * HEXT / HN;
-let ISL = null, MT = null, HGT = null, boats = [], seaMesh = null, RIV = null, RB = null, harb = null, TN = null, PADS = [], OCC = null, square = null;
+const SEA = -1.6, HN = MOBILE ? 192 : 240, HEXT = 480, HSTEP = 2 * HEXT / HN;
+let WEAR = null, ISL = null, MT = null, HGT = null, boats = [], seaMesh = null, RIV = null, RB = null, harb = null, TN = null, PADS = [], OCC = null, square = null;
 function fbm(x, z) { return noise(x, z) * .55 + noise(x * 2.07 + 7.3, z * 2.07 - 3.1) * .3 + noise(x * 4.3 - 2.2, z * 4.3 + 5.5) * .15; }
 const nearTown = (x, z) => !!TN && Math.hypot(x - TN.S.x, z - TN.S.z) < TN.R + 40;
 // every seed gets its own island: a domain-warped, elongated, rotated coastline (bays, peninsulas, sometimes an islet),
@@ -1147,7 +1253,8 @@ function baseH(x, z) {
   return h;
 }
 function terrainH(x, z) { return HGT ? hgtAt(x, z) : baseH(x, z); }
-const TC = { basalt: C(0x45403c), basalt2: C(0x2b2826), wet: C(0x544b42), sand: C(0xd8c394), grass: C(0x87ac58), grass2: C(0x678c43), forest: C(0x4b7334), rock: C(0x8a8174), rock2: C(0x6a6259), snow: C(0xf2f5f8) };
+const TC = { basalt: C(0x45403c), basalt2: C(0x2b2826), wet: C(0x544b42), sand: C(0xd8c394), grass: C(0x87ac58), grass2: C(0x678c43), forest: C(0x4b7334), rock: C(0x8a8174), rock2: C(0x6a6259), snow: C(0xf2f5f8), soil: C(0x9a7a56) };
+function wearAt(x, z) { if (!WEAR) return 0; const j = Math.round((x + HEXT) / HSTEP), i = Math.round((z + HEXT) / HSTEP); return j < 0 || i < 0 || j > HN || i > HN ? 0 : WEAR[i * (HN + 1) + j]; }
 function terrainColor(h, ny, x, z, out) {
   const n = noise(x / 22, z / 22), vd = MT ? Math.hypot(x - MT.x, z - MT.z) / MT.r : 9;
   if (h < SEA + .8 + n * .9) out.copy(TC.sand);
@@ -1156,6 +1263,8 @@ function terrainColor(h, ny, x, z, out) {
   else if (ny < .64 || h > 84 + n * 16) out.copy(ny < .52 ? TC.rock2 : TC.rock);
   else { out.copy(TC.grass).lerp(TC.grass2, sstep(.35, .75, noise(x / 60 + 9, z / 60 - 4))); if (h > 26) out.lerp(TC.forest, sstep(26, 60, h) * .65); }
   if (RB && h > SEA + .3) { const r = riverNear(x, z); if (r.d < 9 && h > r.s - .3) out.lerp(TC.wet, (1 - sstep(4.5, 9, r.d)) * .7); }
+  if (ny < .85 && h > SEA + 3) out.multiplyScalar(.74 + .5 * noise(x / 7 + 3, z / 7 - 5) * (.6 + .8 * noise(x / 2.2, z / 2.2)) + .12 * (noise(x / 40 + 9, z / 40) - .5));   // rock: patchy tones, streaked down the slope
+  if (h > SEA + 2.5 && h < 104) { const w = wearAt(x, z); if (w > 1 && ny > .3) out.lerp(h < 40 && ny > .5 ? TC.soil : TC.rock2, sstep(1, 5, w) * .45); else if (w < -.5) out.lerp(TC.sand, sstep(.5, 2.5, -w) * .4); }   // eroded channels show bare soil / rock, silt settles pale
   return out.multiplyScalar(.93 + hash2(Math.floor(x * 3), Math.floor(z * 3)) * .14);
 }
 function terrainGeo() { // smooth-normal island surface (indexed grid), colours per vertex; detail + bump come from the shader
@@ -1741,11 +1850,37 @@ const hgtRaw = (x, z) => { const fx_ = clamp((x + HEXT) / HSTEP, 0, HN - 1e-4), 
 function* buildHeightsG() {
   const N1 = HN + 1; HGT = new Float32Array(N1 * N1); PT = null;
   for (let i = 0; i <= HN; i++) { if (i % 24 === 23) yield; for (let j = 0; j <= HN; j++) HGT[i * N1 + j] = baseH(-HEXT + j * HSTEP, -HEXT + i * HSTEP); }
-  const D = new Float32Array(N1 * N1);   // cheap thermal erosion on the mountains: steep drops shed material downhill
-  for (let it = 0; it < 4; it++) { yield; D.fill(0);
-    for (let i = 1; i < HN; i++) for (let j = 1; j < HN; j++) { const k = i * N1 + j, h = HGT[k]; if (h < 12) continue; let bk = -1, bd = 2.6;
+  { // relief + erosion on the coarse grid: extra ridged / fbm detail on the highlands, then water droplets cut gullies and ravines and drop silt as fans; `keep` shields the lava, river, falls and town
+    const ER = mul32(nsalt ^ 0x1b873593), keep = new Uint8Array(N1 * N1), mark = (x, z, r) => { const c = Math.ceil(r / HSTEP) + 1, j0 = Math.round((x + HEXT) / HSTEP), i0 = Math.round((z + HEXT) / HSTEP);
+      for (let a = -c; a <= c; a++) for (let b = -c; b <= c; b++) { const i = i0 + a, j = j0 + b; if (i >= 0 && j >= 0 && i <= HN && j <= HN && Math.hypot(a, b) * HSTEP <= r + HSTEP) keep[i * N1 + j] = 1; } };
+    for (const P of LAVA) for (const p of P) mark(p[0], p[1], p[2] + 9);
+    mark(MT.x, MT.z, MT.r * .3); for (const f of FALLS) mark(f.x, f.z, 16), mark(f.tx, f.tz, 14);
+    if (RIV) for (const p of RIV) mark(p.x, p.z, 12);
+    WEAR = new Float32Array(N1 * N1);
+    for (let i = 0; i <= HN; i++) { if (i % 24 === 23) yield; for (let j = 0; j <= HN; j++) { const k = i * N1 + j, h = HGT[k]; if (keep[k] || h < SEA + 6) continue; const x = -HEXT + j * HSTEP, z = -HEXT + i * HSTEP,
+        tw = TN ? sstep(TN.R * 1.0, TN.R * 1.45, Math.hypot(x - TN.S.x, z - TN.S.z)) : 1; if (tw <= 0) continue;
+      HGT[k] += ((ridged(x / 42 + 11, z / 42 - 7) - .4) * 28 * sstep(14, 80, h) + (ridged(x / 19 - 3, z / 19 + 8) - .4) * 11 * sstep(18, 90, h) + (fbm(x / 9 + 4, z / 9 - 9) - .5) * 4.5 * sstep(6, 45, h)) * tw; } }
+    yield;
+    const GR = [0, 0, 0], grad = (x, z) => { const j = x | 0, i = z | 0, u = x - j, v = z - i, k = i * N1 + j, a = HGT[k], b = HGT[k + 1], c = HGT[k + N1], d = HGT[k + N1 + 1];
+      GR[0] = (b - a) * (1 - v) + (d - c) * v; GR[1] = (c - a) * (1 - u) + (d - b) * u; GR[2] = a * (1 - u) * (1 - v) + b * u * (1 - v) + c * (1 - u) * v + d * u * v; return GR; };
+    const dep = (k, a) => { if (!keep[k]) { HGT[k] += a; WEAR[k] -= a; } }, put = (x, z, amt) => { const j = x | 0, i = z | 0, u = x - j, v = z - i, k = i * N1 + j; dep(k, amt * (1 - u) * (1 - v)); dep(k + 1, amt * u * (1 - v)); dep(k + N1, amt * (1 - u) * v); dep(k + N1 + 1, amt * u * v); };
+    const nd = MOBILE ? 18000 : 60000;
+    for (let n = 0; n < nd; n++) { if (n % 1500 === 1499) yield;
+      let x = 2 + ER() * (HN - 4), z = 2 + ER() * (HN - 4), dx = 0, dz = 0, sp = 1, wa = 1, sd = 0;
+      if (keep[(z | 0) * N1 + (x | 0)] || HGT[(z | 0) * N1 + (x | 0)] < SEA + 10) continue;
+      for (let s = 0; s < 44; s++) {
+        const wx = -HEXT + x * HSTEP, wz = -HEXT + z * HSTEP; if (x < 1 || z < 1 || x > HN - 2 || z > HN - 2 || keep[(z | 0) * N1 + (x | 0)] || (TN && Math.hypot(wx - TN.S.x, wz - TN.S.z) < TN.R * 1.05)) break;
+        const g0 = grad(x, z), gx = g0[0], gz = g0[1], h = g0[2]; if (h < SEA + 3) break;
+        dx = dx * .3 - gx * .7; dz = dz * .3 - gz * .7; let l = Math.hypot(dx, dz); if (l < 1e-6) { const a = ER() * 6.283; dx = Math.cos(a); dz = Math.sin(a); l = 1; } dx /= l; dz /= l;
+        const nx = x + dx, nz = z + dz; if (nx < 1 || nz < 1 || nx > HN - 2 || nz > HN - 2) break;
+        const dh = grad(nx, nz)[2] - h, cap = Math.max(-dh, .03) * sp * wa * 4.5;
+        if (sd > cap || dh > 0) { const dp = dh > 0 ? Math.min(dh, sd) : (sd - cap) * .25; sd -= dp; put(x, z, dp); }
+        else { const er = Math.min((cap - sd) * .25, -dh, 1); sd += er; put(x, z, -er); }
+        sp = Math.sqrt(Math.max(.05, sp * sp - dh * 1.2)); wa *= .985; x = nx; z = nz; } } }  const D = new Float32Array(N1 * N1);   // thermal erosion on the mountains: steep drops shed material downhill
+  for (let it = 0; it < 5; it++) { yield; D.fill(0);
+    for (let i = 1; i < HN; i++) for (let j = 1; j < HN; j++) { const k = i * N1 + j, h = HGT[k]; if (h < 12) continue; let bk = -1, bd = HSTEP * .52;
       for (const o of [1, -1, N1, -N1]) { const dd = h - HGT[k + o]; if (dd > bd) { bd = dd; bk = k + o; } }
-      if (bk >= 0) { const m = (bd - 2.6) * .3; D[k] -= m; D[bk] += m; } }
+      if (bk >= 0) { const m = (bd - HSTEP * .52) * .3; D[k] -= m; D[bk] += m; } }
     for (let k = 0; k < D.length; k++) HGT[k] += D[k]; }
   // patch bounds: every node / pad + a margin, snapped to the coarse grid so the rim shares the coarse cell edges exactly
   let x0 = 1e9, x1 = -1e9, z0 = 1e9, z1 = -1e9; const grow = (x, z) => { x0 = Math.min(x0, x); x1 = Math.max(x1, x); z0 = Math.min(z0, z); z1 = Math.max(z1, z); };
@@ -1858,20 +1993,19 @@ function* buildRenderG() {
   carMesh = instMesh(CAR_GEO, carMat, cars.length, true); carMesh.instanceColor = new THREE.InstancedBufferAttribute(new Float32Array(Math.max(1, cars.length) * 3), 3);
   for (const c of cars) { carPose(c); carMesh.instanceColor.array.set([c.r, c.g, c.b], c.i * 3); } carMesh.instanceMatrix.needsUpdate = true; carDirty = false;
   // trees: the set near the city casts shadows; island forests don't (they're outside the shadow frustum anyway)
-  const trunkC = C(0x8b6a4e); treeSets = [];
+  treeSets = [];
   for (const near of [true, false]) { yield;
-    const L = trees.filter(t => nearTown(t.x, t.z) === near), cnt = f => L.filter(t => f(t.k)).length;
-    const TG = near ? TREE_GEO : TREE_LO, M = { trunk: instMesh(TG.trunk, leafMat, cnt(k => k !== 3), near), blob: instMesh(TG.blob, leafMat, cnt(k => k === 0 || k === 2 || k === 3), near), cone: instMesh(TG.cone, leafMat, cnt(k => k === 1), near), palm: instMesh(PALM_GEO, leafMat, cnt(k => k === 4), near) };
-    let it = 0, ib = 0, ic = 0, ip = 0;
-    for (const t of L) { t.m = M; t.ti = t.k !== 3 ? it++ : -1; t.ci = t.k === 1 ? ic++ : t.k === 4 ? ip++ : ib++; writeTree(t);
-      setColorArr(t.k === 1 ? M.cone : t.k === 4 ? M.palm : M.blob, t.ci, t.col.r, t.col.g, t.col.b); if (t.ti >= 0) setColorArr(M.trunk, t.ti, trunkC.r, trunkC.g, trunkC.b); }
-    for (const k in M) { if (!M[k].instanceColor) setColorArr(M[k], 0, 1, 1, 1); M[k].instanceMatrix.needsUpdate = true; M[k].instanceColor.needsUpdate = true; }   // same program variant whatever the island
+    const L = trees.filter(t => nearTown(t.x, t.z) === near), TS = TV[near ? 0 : 1], cnt = {}, M = {}, ix = {};
+    for (const t of L) { const f = t.k === 1 ? 'p' : t.k === 4 ? 'm' : t.k === 2 ? 'c' : t.k === 3 ? 'u' : 'b'; t.key = f + Math.floor(hash2(Math.round(t.x * 3), Math.round(t.z * 3) + 17) * TS[f].length); cnt[t.key] = (cnt[t.key] || 0) + 1; }
+    for (const key in cnt) M[key] = instMesh(TS[key[0]][+key.slice(1)], key[0] === 'm' ? leafMatDS : leafMat, cnt[key], near);
+    for (const t of L) { t.m = M; t.ci = ix[t.key] || 0; ix[t.key] = t.ci + 1; writeTree(t); setColorArr(M[t.key], t.ci, t.col.r, t.col.g, t.col.b); }
+    for (const k in M) { M[k].instanceMatrix.needsUpdate = true; M[k].instanceColor.needsUpdate = true; }
     treeSets.push(M);
   }
   lampMesh = instMesh(LAMP_GEO, vcMat, lamps.length, false); lamps.forEach((l, i) => writeProp(lampMesh, i, l));
   benchMesh = instMesh(BENCH_GEO, vcMat, benches.length, false); benches.forEach((b, i) => writeProp(benchMesh, i, b));
   // low-poly clouds in a high ring around the island
-  clouds = []; const nCl = 16; cloudMesh = instMesh(TREE_GEO.blob, cloudMat, nCl * 5, false); cloudMesh.receiveShadow = false;
+  clouds = []; const nCl = 16; cloudMesh = instMesh(BLOB_GEO, cloudMat, nCl * 5, false); cloudMesh.receiveShadow = false;
   for (let i = 0; i < nCl; i++) { const a = i / nCl * 6.283 + rr(-.2, .2), r = rr(1000, 1450), cy = rr(250, 380), sc = rr(30, 52);
     for (let k = 0; k < 5; k++) clouds.push({ a, r: r + rr(-sc * .4, sc * .4), o: (k - 2) * sc * .85 + rr(-3, 3), y: cy + rr(-2, 3) + (k >= 1 && k <= 3 ? sc * .28 : 0), s: sc * rr(.6, 1.05), w: .004 + rnd() * .003 }); }
   yield; for (const o of cityGroup.children.slice()) preload(o); while (stage.length && !syncGen) yield; stage.length = 0;   // upload every new buffer ahead of the swap, one object per slice (no 500 ms first frame)
@@ -1879,19 +2013,11 @@ function* buildRenderG() {
   scene.add(cityGroup); smoke.attach(); fire.attach(); plume.attach(); mist.attach(); scorch.attach(); shards.attach(); pebbles.attach(); rings.attach(); initPool();
 }
 function writeTree(t) {
-  const M = t.m, cm = t.k === 1 ? M.cone : t.k === 4 ? M.palm : M.blob;
-  if (!t.alive) { if (t.ti >= 0) M.trunk.instanceMatrix.array.set(ZERO16, t.ti * 16); cm.instanceMatrix.array.set(ZERO16, t.ci * 16); return; }
+  const cm = t.m[t.key];
+  if (!t.alive) { cm.instanceMatrix.array.set(ZERO16, t.ci * 16); return; }
   const s = t.s; _q.setFromAxisAngle(_up, t.rot);
-  if (t.k === 3) { _m.compose(_p.set(t.x, t.y + .5 * s, t.z), _q, _s.set(1.1 * s, .8 * s, 1.1 * s)); _m.toArray(cm.instanceMatrix.array, t.ci * 16); return; }
-  const th = t.k === 1 ? 1.1 * s : t.k === 4 ? 5.6 * s : 1.9 * s * t.st, tw = t.k === 4 ? .7 * s : s;
-  _m.compose(_p.set(t.x, t.y, t.z), _q, _s.set(tw, th, tw)); _m.toArray(M.trunk.instanceMatrix.array, t.ti * 16);
-  if (t.k === 1) _m.compose(_p.set(t.x, t.y + th * .55, t.z), _q, _s.set(1.5 * s, 2.3 * s * t.st, 1.5 * s));
-  else if (t.k === 2) _m.compose(_p.set(t.x, t.y + th + 1.6 * s, t.z), _q, _s.set(.95 * s, 2.5 * s, .95 * s));
-  else if (t.k === 4) _m.compose(_p.set(t.x, t.y + th, t.z), _q, _s.set(1.15 * s, 1.15 * s, 1.15 * s));
-  else _m.compose(_p.set(t.x, t.y + th + 1.1 * s, t.z), _q, _s.set(1.55 * s, 1.35 * s * t.st, 1.55 * s));
-  _m.toArray(cm.instanceMatrix.array, t.ci * 16);
-}
-function writeProp(mesh, i, o) { if (!o.alive) { mesh.instanceMatrix.array.set(ZERO16, i * 16); } else { _q.setFromAxisAngle(_up, o.yaw); _m.compose(_p.set(o.x, o.y, o.z), _q, _s.set(1, 1, 1)); _m.toArray(mesh.instanceMatrix.array, i * 16); } mesh.instanceMatrix.needsUpdate = true; }
+  _m.compose(_p.set(t.x, t.y - .05, t.z), _q, _s.set(s, s * t.st, s)); _m.toArray(cm.instanceMatrix.array, t.ci * 16);
+}function writeProp(mesh, i, o) { if (!o.alive) { mesh.instanceMatrix.array.set(ZERO16, i * 16); } else { _q.setFromAxisAngle(_up, o.yaw); _m.compose(_p.set(o.x, o.y, o.z), _q, _s.set(1, 1, 1)); _m.toArray(mesh.instanceMatrix.array, i * 16); } mesh.instanceMatrix.needsUpdate = true; }
 
 // ============================================================ particles / VFX
 // Soft camera-facing sprites, pooled per system. Smoke, dust, plume and mist are lit by the sun through a sphere normal per
@@ -2450,12 +2576,23 @@ addEventListener('hashchange', () => { const s = hashSeed(); if (s != null && s 
 document.querySelectorAll('.copy').forEach(b => b.addEventListener('click', () => { const v = b.dataset.copy; if (navigator.clipboard) navigator.clipboard.writeText(v).then(() => { b.textContent = 'Copied'; setTimeout(() => b.textContent = 'Copy', 1400); }, () => toast('Select the text to copy')); else toast('Select the text to copy'); }));
 // CV
 const narrow = () => innerWidth <= 760;
-function setCV(open) { document.body.classList.toggle('cv-off', !open); $('#cvHandle').setAttribute('aria-expanded', open); }
+function setCV(open) { document.body.classList.toggle('cv-off', !open); if (!open) document.body.classList.remove('cv-full'); $('#cvHandle').setAttribute('aria-expanded', open); }
 if (narrow()) setCV(false);
-$('#cvHide').onclick = () => setCV(false); $('#cvTab').onclick = () => setCV(true); $('#cvHandle').onclick = () => setCV(document.body.classList.contains('cv-off'));
+$('#cvHide').onclick = () => setCV(false); $('#cvTab').onclick = () => setCV(true);
+{ // phone sheet: tap the handle to peek <-> half, swipe it up / down to step peek -> half -> full
+  const hd = $('#cvHandle'), B = document.body; let y0 = null, moved = false;
+  const lvl = () => B.classList.contains('cv-off') ? 0 : B.classList.contains('cv-full') ? 2 : 1;
+  const go = n => { n = clamp(n, 0, 2); B.classList.toggle('cv-off', n === 0); B.classList.toggle('cv-full', n === 2); hd.setAttribute('aria-expanded', n > 0); };
+  hd.addEventListener('pointerdown', e => { y0 = e.clientY; moved = false; try { hd.setPointerCapture(e.pointerId); } catch (_) {} });
+  hd.addEventListener('pointermove', e => { if (y0 != null && Math.abs(e.clientY - y0) > 10) moved = true; });
+  hd.addEventListener('pointerup', e => { if (y0 == null) return; const dy = e.clientY - y0; y0 = null; if (!narrow()) { setCV(B.classList.contains('cv-off')); return; } if (moved && Math.abs(dy) > 24) go(lvl() + (dy < 0 ? 1 : -1)); else if (!moved) go(lvl() === 1 ? 0 : 1); });
+  hd.addEventListener('pointercancel', () => { y0 = null; });
+  hd.addEventListener('click', e => { if (e.detail === 0) go(lvl() === 0 ? 1 : 0); });   // keyboard
+  window.cvSheet = go;
+}
 const body = $('#cvBody'), tabs = [...document.querySelectorAll('.tabs button')];
 tabs.forEach(t => t.onclick = () => { if (narrow()) setCV(true); const s = document.getElementById(t.dataset.s); body.scrollTo({ top: s.offsetTop - body.offsetTop - 4, behavior: REDUCED ? 'auto' : 'smooth' }); });
-body.addEventListener('scroll', () => { let cur = tabs[0]; for (const t of tabs) if (document.getElementById(t.dataset.s).offsetTop - body.offsetTop - 40 <= body.scrollTop) cur = t; if (body.scrollTop + body.clientHeight >= body.scrollHeight - 4) cur = tabs[tabs.length - 1]; tabs.forEach(t => t.setAttribute('aria-current', t === cur)); }, { passive: true });
+body.addEventListener('scroll', () => { let cur = tabs[0]; for (const t of tabs) if (document.getElementById(t.dataset.s).offsetTop - body.offsetTop - 40 <= body.scrollTop) cur = t; if (body.scrollTop + body.clientHeight >= body.scrollHeight - 4) cur = tabs[tabs.length - 1]; tabs.forEach(t => t.setAttribute('aria-current', t === cur)); if (narrow() && cur.parentNode.scrollWidth > cur.parentNode.clientWidth) cur.parentNode.scrollTo({ left: cur.offsetLeft - (cur.parentNode.clientWidth - cur.offsetWidth) / 2, behavior: 'auto' }); }, { passive: true });
 addEventListener('keydown', e => { if (e.target.closest && e.target.closest('input,textarea')) return; const k = +e.key; if (k >= 1 && k <= 6) selectWeapon(k - 1); if (e.key === 'Escape' && cine) cineEnd(); });
 
 // pointer / picking
@@ -2585,7 +2722,7 @@ function setupPost() { // one render path at every quality (scene -> HDR target 
 const usePost = () => !!composer;
 
 // ============================================================ loop
-let qT = 0, buildAt = 0, acc = 0, stepMs = 0, T = 0, fpsAcc = 0, fpsN = 0, fpsT = 0, lowT = 0, fps = 60, calls = 0, vOff = 0;
+let qT = 0, buildAt = 0, acc = 0, stepMs = 0, T = 0, fpsAcc = 0, fpsN = 0, fpsT = 0, lowT = 0, fps = 60, calls = 0, vOff = 0, vOffY = 0;
 function applyQuality() { const q = Q(); renderer.setPixelRatio(Math.min(devicePixelRatio, q.pr) * q.ps);
   if (sun.shadow.mapSize.x !== q.sh) { sun.shadow.mapSize.set(q.sh, q.sh); if (sun.shadow.map) { sun.shadow.map.dispose(); sun.shadow.map = null; } }
   if (gtao) gtao.enabled = !!q.ao; if (bloom) bloom.enabled = !!q.bloom; if (vign) vign.enabled = q.vig !== 0; if (composer) { const ms = q.msaa || 0; if (fxaa) fxaa.enabled = !ms; for (const rt of [composer.renderTarget1, composer.renderTarget2]) if (rt.samples !== ms) { rt.samples = ms; rt.dispose(); } }   /* MSAA on HQ, FXAA otherwise */ for (const t of tiles) t.mesh.castShadow = !!q.hiSh; resize(); }
@@ -2600,7 +2737,7 @@ function updateSim(dt) {
   acc += dt; let n = 0; while (acc >= STEP - 1e-9 && n < maxSub) { const a = performance.now(); physStep(); stepMs = stepMs * .9 + (performance.now() - a) * .1; acc -= STEP; n++; } if (n === maxSub && acc > STEP) acc = 0;
   updateStrikes(dt); updateCharges(dt); updateEruptions(dt);
   if (unleash && !cine) { unleashT -= dt; if (unleashT <= 0) { unleashT = fr(1.1, 2.4); randomAttack(); } }
-  runJobs(); updateDebris(dt); updateProjVisuals(dt); if (!genBusy) { updateTraffic(dt); updateFountain(dt); updateBoats(dt); } updateClouds(dt); oceanMat.uniforms.uT.value = simT;
+  runJobs(); updateDebris(dt); updateProjVisuals(dt); if (!genBusy) { updateTraffic(dt); updateFountain(dt); updateBoats(dt); } updateClouds(dt); oceanMat.uniforms.uT.value = simT; LEAFU.value = REDUCED ? 0 : simT;
   updateVolcano(dt); updateE(dt); smoke.update(dt); fire.update(dt); plume.update(dt); mist.update(dt); shards.update(dt); pebbles.update(dt); rings.update(dt); flushBld();
   flashI *= Math.exp(-dt * 7); flash.intensity = flashI < 1 ? 0 : flashI; shakeA *= Math.exp(-dt * 6);
 }
@@ -2612,7 +2749,9 @@ function fitShadow() { // the sun's shadow frustum follows what the camera looks
 function render() {
   if (trash.length) emptyTrash(cine && cine.gen ? 0 : 6); sky.position.copy(camera.position); fitShadow(); updLod();
   const want = (!cine && !CAPTURE && !narrow() && !document.body.classList.contains('cv-off')) ? 204 : 0; vOff += (want - vOff) * .12; if (Math.abs(vOff - want) < .5) vOff = want;
-  if (vOff > .5) camera.setViewOffset(innerWidth, innerHeight, -vOff, 0, innerWidth, innerHeight); else if (camera.view && camera.view.enabled) camera.clearViewOffset();
+  const B = document.body, sheetPx = cine || CAPTURE || !narrow() || B.classList.contains('cv-off') ? 0 : Math.min(innerHeight * (B.classList.contains('cv-full') ? .9 : .6), B.classList.contains('cv-full') ? 760 : 520) * .5;   // phones: the city re-centres in the part the sheet leaves free
+  vOffY += (sheetPx - vOffY) * .12; if (Math.abs(vOffY - sheetPx) < .5) vOffY = sheetPx;
+  if (vOff > .5 || vOffY > .5) camera.setViewOffset(innerWidth, innerHeight, -vOff, vOffY, innerWidth, innerHeight); else if (camera.view && camera.view.enabled) camera.clearViewOffset();
   let sh = false; if (shakeA > .002) { sh = true; shakeO.set(fr(-1, 1), fr(-1, 1), fr(-1, 1)).multiplyScalar(shakeA); camera.position.add(shakeO); }
   stageFrame(true); renderer.info.reset(); if (usePost()) composer.render(); else renderer.render(scene, camera); stageFrame(false); calls = renderer.info.render.calls;
   if (ovOn) { renderer.autoClear = false; renderer.render(ovScene, ovCam); renderer.autoClear = true; }
@@ -2654,5 +2793,5 @@ if (CAPTURE) {
   window.__resolveReady({ seed, duration: DURATION });
 }
 </script>
-</body>
-</html>
+
+</body></html>
