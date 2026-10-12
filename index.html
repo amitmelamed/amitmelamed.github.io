@@ -95,6 +95,13 @@ body.cv-off #cv{transform:translateX(calc(-100% - 28px));opacity:0;pointer-event
 .copy:hover{background:#fff}
 .edu{font-size:13px;color:#d4d7e1}
 .contact-row a.sel{color:#fffaf0;text-decoration:none}
+.qwrap{position:relative}
+.qmenu{position:absolute;right:0;top:calc(100% + 8px);min-width:200px;padding:6px;border-radius:14px;background:rgba(17,21,33,.97);border:1px solid rgba(255,255,255,.14);box-shadow:0 18px 44px rgba(10,12,22,.4);z-index:45}
+.qmenu button{display:flex;align-items:baseline;justify-content:space-between;gap:14px;width:100%;padding:11px 12px;border-radius:9px;font-size:14px;font-weight:600;text-align:left;color:#f5f1e8}
+.qmenu button small{font-size:11.5px;font-weight:400;color:#9ca1b2}
+.qmenu button:hover{background:rgba(255,255,255,.07)}
+.qmenu button[aria-checked=true]{background:#f5f1e8;color:#1b1f2c}
+.qmenu button[aria-checked=true] small{color:#59606f}
 .avatar.sm{width:38px;height:38px;border-radius:11px;font-size:14px}
 #cvTab{position:fixed;left:0;top:50%;z-index:24;transform:translate(-110%,-50%);padding:14px 9px;border-radius:0 12px 12px 0;writing-mode:vertical-rl;font-family:var(--fd);font-weight:700;font-size:13px;letter-spacing:.06em;
  background:#f5f1e8;color:#1b1f2c;box-shadow:0 8px 30px rgba(10,12,22,.3);transition:transform .45s cubic-bezier(.2,.8,.2,1)}
@@ -134,7 +141,9 @@ body.capture #load{display:none}
  .brand span{display:none}
  .btn{width:40px;height:40px;padding:0;justify-content:center;border-radius:12px}
  .btn span,.chip{display:none}
+ #bRebuild{display:none}
  .btn svg{width:18px;height:18px}
+ .qmenu button{padding:14px 14px;font-size:15px}
  .tools{gap:6px}
  #stats{display:none}
  #cv{left:0;right:0;top:auto;bottom:0;width:auto;max-width:none;height:min(60vh,520px);height:min(60dvh,520px);border-radius:22px 22px 0 0;z-index:35;border-bottom:0;background:rgba(17,21,33,.96);-webkit-backdrop-filter:none;backdrop-filter:none;
@@ -207,6 +216,13 @@ body.capture #load{display:none}
     <button class="btn" id="bRebuild" title="Rebuild this city (same seed)"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg><span>Rebuild</span></button>
     <button class="btn" id="bUnleash" aria-pressed="false" title="Auto destruction: random weapons at random buildings"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg><span>Unleash</span></button>
     <button class="btn acc" id="bReel" title="Play the cinematic showreel"><svg viewBox="0 0 24 24"><path d="M7 5v14l11-7z" fill="currentColor"/></svg><span>Showreel</span></button>
+    <div class="qwrap"><button class="btn" id="bQual" aria-haspopup="true" aria-expanded="false" title="Graphics quality"><svg viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg><span id="qLbl">HQ</span></button>
+      <div class="qmenu" id="qMenu" role="menu" hidden>
+        <button role="menuitemradio" data-q="auto" aria-checked="false">Auto<small>adapts to frame rate</small></button>
+        <button role="menuitemradio" data-q="0" aria-checked="false">HQ<small>best looking</small></button>
+        <button role="menuitemradio" data-q="1" aria-checked="false">MQ<small>balanced</small></button>
+        <button role="menuitemradio" data-q="2" aria-checked="false">LQ<small>fastest</small></button>
+      </div></div>
     <button class="btn" id="bMute" aria-pressed="false" title="Mute / unmute"><svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9z"/><path id="mWave" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg></button>
   </div>
 </header>
@@ -326,7 +342,10 @@ const QL = MOBILE
   : [{ n: 'HQ', pr: 1.75, ps: 1, sh: 2048, ao: 1, bloom: 1, hiSh: 1, msaa: 4, vig: 1, cap: 600, spawn: 220, part: 1 }, { n: 'MQ', pr: 1.25, ps: .85, sh: 1024, ao: 0, bloom: 1, hiSh: 0, vig: 0, cap: 320, spawn: 150, part: .7 }, { n: 'LQ', pr: 1, ps: .72, sh: 1024, ao: 0, bloom: 0, hiSh: 0, vig: 0, cap: 220, spawn: 110, part: .5 }];
 const GPU = (() => { try { const g = document.createElement('canvas').getContext('webgl2'), e = g && g.getExtension('WEBGL_debug_renderer_info'); return e ? String(g.getParameter(e.UNMASKED_RENDERER_WEBGL)) : ''; } catch (e) { return ''; } })();
 const IGPU = /intel|uhd|iris|mali|adreno|apple|powervr|swiftshader|llvmpipe|microsoft basic/i.test(GPU);   // integrated GPUs start at MQ
-let qlev = CAPTURE ? 0 : MOBILE ? 1 : !IGPU ? 0 : 1; const Q = () => QL[qlev];   // phones start at MQ (speed first); the fps governor steps further down to LQ if needed
+// quality mode: 0 HQ / 1 MQ / 2 LQ are fixed; 'auto' starts at MQ and lets the fps governor step down. Default: HQ (fixed) on a PC, Auto on a phone; the choice is remembered.
+let qmode = MOBILE ? 'auto' : 0;
+try { const s = localStorage.getItem('city-quality'); if (s === 'auto' || s === '0' || s === '1' || s === '2') qmode = s === 'auto' ? 'auto' : +s; } catch (e) {}
+let qlev = CAPTURE ? 0 : qmode === 'auto' ? (MOBILE || IGPU ? 1 : 0) : qmode; const Q = () => QL[qlev];
 
 // ============================================================ rng / noise
 const mul32 = a => () => { a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
@@ -2571,6 +2590,16 @@ $('#bReel').onclick = () => { audioInit(); cineStart(); };
 $('#bSeed').onclick = () => { const u = location.href.split('#')[0] + '#s' + seed; if (navigator.clipboard) navigator.clipboard.writeText(u).then(() => toast('Link to this town copied'), () => toast('Seed ' + seed)); else toast('Seed ' + seed); };
 function setMute(v) { muted = v; $('#bMute').setAttribute('aria-pressed', v); $('#mWave').style.display = v ? 'none' : ''; if (MG) MG.gain.value = v ? 0 : .8; try { localStorage.setItem('city-muted', v ? '1' : '0'); } catch (e) {} }
 $('#bMute').onclick = () => { audioInit(); setMute(!muted); }; setMute(muted);
+// graphics quality menu
+function updQUI() { $('#qLbl').textContent = qmode === 'auto' ? 'Auto · ' + Q().n : Q().n; $('#bQual').title = 'Graphics quality: ' + (qmode === 'auto' ? 'Auto (now ' + Q().n + ')' : Q().n);
+  document.querySelectorAll('#qMenu button').forEach(b => b.setAttribute('aria-checked', String(b.dataset.q) === String(qmode))); }
+function setQuality(m) { qmode = m; lowT = 0; if (m !== 'auto') { qlev = m; applyQuality(); } try { localStorage.setItem('city-quality', String(m)); } catch (e) {} updQUI(); toast('Quality → ' + (m === 'auto' ? 'Auto' : QL[m].n)); }
+function qMenu(open) { $('#qMenu').hidden = !open; $('#bQual').setAttribute('aria-expanded', open); }
+$('#bQual').onclick = e => { e.stopPropagation(); qMenu($('#qMenu').hidden); };
+document.querySelectorAll('#qMenu button').forEach(b => b.onclick = e => { e.stopPropagation(); setQuality(b.dataset.q === 'auto' ? 'auto' : +b.dataset.q); qMenu(false); });
+document.addEventListener('click', e => { if (!e.target.closest('.qwrap')) qMenu(false); });
+addEventListener('keydown', e => { if (e.key === 'Escape') qMenu(false); });
+updQUI();
 function setHash() { try { history.replaceState(null, '', '#s' + seed); } catch (e) {} }
 addEventListener('hashchange', () => { const s = hashSeed(); if (s != null && s !== seed && !CAPTURE) { seed = s; rebuild(seed); } });
 document.querySelectorAll('.copy').forEach(b => b.addEventListener('click', () => { const v = b.dataset.copy; if (navigator.clipboard) navigator.clipboard.writeText(v).then(() => { b.textContent = 'Copied'; setTimeout(() => b.textContent = 'Copy', 1400); }, () => toast('Select the text to copy')); else toast('Select the text to copy'); }));
@@ -2765,8 +2794,8 @@ function tick(dt) {
   fpsAcc += dt; fpsN++;
   if (T - fpsT > .5) { fps = fpsN / fpsAcc; fpsAcc = 0; fpsN = 0; fpsT = T;
     $('#stats').textContent = `${Math.round(fps)} fps · ${debris.length} bodies · ${calls} draws · ${Q().n}${usePost() ? '+' : ''}`;
-    if (!CAPTURE && !cine && T > 6 && T - qT > 8 && performance.now() - buildAt > 4000 && fps < 40) lowT += .5; else lowT = Math.max(0, lowT - .5);   // hysteresis: only a sustained slump steps quality down
-    if (lowT >= 3 && qlev < QL.length - 1) { qlev++; qT = T; lowT = 0; applyQuality(); toast('Quality → ' + Q().n); } }
+    if (!CAPTURE && !cine && qmode === 'auto' && T > 6 && T - qT > 8 && performance.now() - buildAt > 4000 && fps < 40) lowT += .5; else lowT = Math.max(0, lowT - .5);   // hysteresis: only a sustained slump steps quality down (Auto mode only)
+    if (lowT >= 3 && qlev < QL.length - 1) { qlev++; qT = T; lowT = 0; applyQuality(); updQUI(); toast('Quality → ' + Q().n); } }
 }
 let last = 0, raf = 0;
 function loop(now) { raf = requestAnimationFrame(loop); const dt = Math.min((now - (last || now)) / 1000, .1); last = now; tick(dt); }
